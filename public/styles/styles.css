@@ -1,0 +1,54 @@
+/* Navbar Styles */
+
+.navbar{
+    background-color: #fe346e;
+    font-size: 1.5rem;
+}
+
+.navbar-brand{
+    font-size: 2.5rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-icon{
+    height: 3.7rem;
+    margin: 0 1rem;
+    padding-bottom: 0.3rem;
+}
+
+/* Main Section */
+
+#main{
+    background-color: #d45079;
+    height: 100vh;
+}
+
+.heading{
+    margin-top: 8rem;
+}
+
+.logo{
+    height: 70%;
+    position: relative;
+    top: 6rem;
+    left: 6rem;
+}
+
+@media (max-width: 500px){
+    .heading{
+        margin: 0;
+        font-size: 3.5rem;
+    }
+    .logo{
+        height: 70%;
+        position: relative;
+        top: 3rem;
+        left: 3rem;
+    }
+    .error-404{
+        height: 29rem;
+    }
+}
+
+
+

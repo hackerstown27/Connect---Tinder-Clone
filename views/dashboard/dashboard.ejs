@@ -1,0 +1,139 @@
+<%- include("partials/header") -%>
+
+    <div class="container mt-4 pt-5">
+        <% if (success.length != 0) { %>
+            <div class="alert alert-success mb-5" role="alert">
+                <%=success%>
+              </div>
+        <% } %>
+        <% if (error.length != 0) { %>
+            <div class="alert alert-danger mb-5" role="alert">
+                <%=error%>
+              </div>
+        <% } %>
+        <div class="row justify-content-around">
+            <div class="col-md-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <img src="icons/emoticons.svg" style="height: 100px;" alt="">
+                        </div>
+                        <div class="col align-self-center">
+                            <p class="dash-heading">Matches</p>
+                        </div>
+                    </div>
+                    <form action="/search" method="POST">
+                        <div class="input-group my-3">
+                            <input type="text" name="searchQuery" class="form-control" placeholder="Search" autocomplete="off" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="border rounded-lg border-secondary mt-4 p-3">
+                        <% matches.forEach(function(match){ %>
+                            <hr>
+                            <div class="row">
+                                <div class="col-2 m-1 p-1">
+                                    <img src="icons/avatar/<%=match.Avatar%>" class="border rounded-circle" style="height: 50px;" alt="">
+                                </div>
+                                <div class="col-6 align-self-center mt-2">
+                                    <p class="lead user-name"><%=match.Name%></p>
+                                </div>
+                                <div class="col align-self-center">
+                                    <button id="<%=match._id%>" class="btn btn-md btn-outline-danger view-btn">View</a>
+                                </div>
+                            </div>
+                        <% }); %>
+                        <%if(matches.length === 0){%>
+                            <div class="text-center">
+                                <img src="icons/box.svg" class="text-center m-3" style="height: 150px;" alt="">
+                                <p class="h4 text-monospace text-secondary m-3">No Match Found So Far!</p>
+                            </div>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 py-5 mx-auto">
+                <div id="default-view">
+                    <div class="card default-view p-5" style="width: 100%;">
+                        <img src="icons/man_2.svg" style="height: 250px;" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h2 class="card-title text-center text-primary">Profile Showcase</h2>
+                        </div>
+                        <ul class="list-group list-group-flush my-4">
+                            <div class="container">
+                                <h4 class="lead text-monospace text-center text-primary">Click <kbd>View</kbd> To Show Details</h4>
+                            </div> 
+                        </ul>
+                    </div>
+                </div>
+                <% matches.forEach(function(match){ %>
+                <div id="<%=match._id%>" class="view-card" style="display: none;">
+                    <div class="card p-5" style="width: 100%;">
+                        <img src="icons/avatar/<%=match.Avatar%>" style="height: 150px;" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><%=match.Name%></h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <div class="container">
+                                <table class="table table-hover table-borderless">
+                                    <tr>
+                                        <th scope="row">Course</th>
+                                        <td><%=match.Course%></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Branch</th>
+                                        <td><%=match.Branch%></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">DOB</th>
+                                        <td><%=match.DOB.split(" ")[0]%></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Gender</th>
+                                        <td><%=match.Gender%></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Phone No</th>
+                                        <td><%="+91 " + match.MobileNo%></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email</th>
+                                        <td><%=match.Email%></td>
+                                    </tr>
+                                    <tr class="border border-success rounded-lg">
+                                        <th scope="row">WhatsApp</th>
+                                        <td>+91 <%=match.WhatsAppNo || "NA"%></td>
+                                    </tr>
+                                </table>
+                            </div> 
+                        </ul>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector("hr").remove();
+        var viewBtns = document.querySelectorAll(".view-btn");
+        var cards = document.querySelectorAll(".view-card");
+        viewBtns.forEach(function(btn){
+            btn.addEventListener("click", function(){
+                document.querySelector("#default-view").style.display = "none";
+                btnId = btn.getAttribute("id");
+                cards.forEach(function(card){
+                    cardID = card.getAttribute("id");
+                    if(cardID === btnId){
+                        card.style.display = "flex";
+                    } else {
+                        card.style.display = "none";
+                    }
+                })
+            });
+        });
+    </script>
+
+<%- include("partials/footer") -%>

@@ -1,0 +1,158 @@
+<%- include("partials/header") -%>
+
+  <div class="container mt-5 border border-danger rounded-lg">
+    <% if (message.length != 0) { %>
+      <div class="alert alert-success mt-3" role="alert">
+          <%=message%>
+        </div>
+    <% } %>
+    <div id="message-box">
+
+    </div>
+    <div class="row m-1 p-1 m-md-5 p-md-5 justify-content-around">
+      <div class="col-md-4">
+        <img class="ml-4 m-md-0" style="height: 18rem;" src="icons/avatar/<%=avatar%>" alt="">
+        <div class="row justify-content-end">
+          <div class="col">
+            <button type="button" class="btn btn-block btn-outline-warning mt-3 m-md-3" data-toggle="modal" data-target="#exampleModalCenter">
+              <img src="icons/camera.svg" style="height: 25px; margin: 0 10px;" alt="">Choose Your Avatar
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle"><button class="btn btn-secondary m-3"><img src="icons/upload.svg" style="height: 25px; margin: 0 10px;" alt="">Select Your Avatar</button>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <%if(userInfo.Gender === "F"){%>
+                    <div class="my-3 my-md-5">
+                      <div class="row">
+                        <div class="col-4">
+                          <form action="/avatar" method="POST">
+                            <input type="hidden" name="avatar" value="F1.svg">
+                            <button class="btn btn-outline-primary"><img class="avatar" src="icons/avatar/F1.svg" alt=""></button>
+                          </form>
+                        </div>
+                        <div class="col-4">
+                          <form action="/avatar" method="POST">
+                            <input type="hidden" name="avatar" value="F2.svg">
+                            <button class="btn btn-outline-primary"><img class="avatar" src="icons/avatar/F2.svg" alt=""></button>
+                          </form>
+                        </div>
+                        <div class="col-4">
+                          <form action="/avatar" method="POST">
+                            <input type="hidden" name="avatar" value="F3.svg">
+                            <button class="btn btn-outline-primary"><img class="avatar" src="icons/avatar/F3.svg" alt=""></button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <%} else {%>
+                      <div class="my-3 my-md-4">
+                        <div class="row">
+                          <div class="col-4">
+                            <form action="/avatar" method="POST">
+                              <input type="hidden" name="avatar" value="M1.svg">
+                              <button class="btn btn-outline-primary"><img class="avatar" src="icons/avatar/M1.svg"></button>
+                            </form>
+                          </div>
+                          <div class="col-4">
+                            <form action="/avatar" method="POST">
+                              <input type="hidden" name="avatar" value="M2.svg">
+                              <button class="btn btn-outline-primary"><img class="avatar" src="icons/avatar/M2.svg"></button>
+                            </form>
+                          </div>
+                          <div class="col-4">
+                            <form action="/avatar" method="POST">
+                              <input type="hidden" name="avatar" value="M3.svg">
+                              <button class="btn btn-outline-primary"><img class="avatar" src="icons/avatar/M3.svg"></button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <%}%>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button id="whatsapp-btn" class="btn btn-block btn-outline-success mt-3 m-md-3"><img src="icons/whatsapp.svg" style="height: 20px; margin: 0 5px;" alt=""> Update WhatsApp No</button>
+            <div id="whatsapp-input">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3 m-md-0 col-md-7">
+        <table class="table table-hover table-borderless">
+          <tr>
+            <th scope="row">Name</th>
+            <td><%=userInfo.Name%></td>
+          </tr>
+          <tr>
+            <th scope="row">Gender</th> 
+            <td><%=userInfo.Gender%></td>
+          </tr>
+          <tr>
+            <th scope="row">DOB</th>
+            <td><%=userInfo.DOB.split(" ")[0]%></td>
+          </tr>
+          <tr>
+            <th scope="row">Status</th>
+            <td><%=userInfo.Status%></td>
+          </tr>
+          <tr>
+            <th scope="row">Course</th>
+            <td><%=userInfo.Course%></td>
+          </tr>
+          <tr>
+            <th scope="row">Branch</th>
+            <td><%=userInfo.Branch%></td>
+          </tr>
+          <tr>
+            <th scope="row">Phone No</th>
+            <td><%="+91 " + userInfo.MobileNo%></td>
+          </tr>
+          <tr>
+            <th scope="row">Email</th>
+            <td><%=userInfo.Email%></td>
+          </tr>
+          <tr>
+            <th scope="row">Address</th>
+            <td><%=userInfo.Address + " " + userInfo.City_District + " " + userInfo.State + " " + userInfo.Country + " " + userInfo.Pincode%></td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    switchcond = false;
+    document.querySelector("#whatsapp-btn").addEventListener("click", function(){
+      if(!switchcond){
+        document.querySelector("#whatsapp-input").innerHTML = '<form id="whatsAppForm" action="/updateWhatsApp" method="POST"><div class="input-group mt-3 m-md-3"> <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">+91</span></div><input type="number" id="whatsAppNoField" class="form-control" name="whatsAppNo" placeholder="WhatsApp No" autocomplete="off" required><input type="hidden" name="userId" value=<%=userInfo.Email%>><div class="input-group-append"><button class="btn btn-outline-success">Save</button></div></div></form>';
+        whatsAppNo = document.querySelector("#whatsAppNoField");
+        document.querySelector("form").addEventListener("submit", function(evt){
+          if(whatsAppNo.value.length != 10){
+            evt.preventDefault();
+            document.querySelector("#message-box").innerHTML = '<div class="alert alert-danger mt-3" role="alert">Please Enter Correct WhatsApp Number</div>'
+            document.querySelector(".alert-success").remove();
+          }
+        });
+      } else {
+        document.querySelector("#whatsapp-input").innerHTML = '';
+      }
+      switchcond = !switchcond;
+    });
+  </script>
+
+<%- include("partials/footer") -%>

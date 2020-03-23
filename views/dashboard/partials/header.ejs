@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="icon" href="icons/favicon.png" type="image/png" sizes="32x32">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/09b97a43b9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <title>Connect</title>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard"><img class="navbar-icon" src="icons/heart.svg" alt="">Connect</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img style="height: 50px; padding: 0px 7px 10px;" src="icons/avatar/<%=avatar%>" alt=""> <%=username%>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="/profile"><img src="icons/profile.svg" style="height: 50px; padding: 0 10px 10px 0" alt=""> User Profile</a>
+                      <a class="dropdown-item" href="/changePassword"><img src="icons/password.svg" style="height: 50px; padding: 0 10px 10px 0" alt=""> Change Password</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="/logout"><img src="icons/logout.svg" style="height: 50px; padding: 0 10px 10px 0" alt=""> Logout</a>
+                    </div>
+                </li>
+            </ul>
+            </div>
+        </div>
+      </nav>
