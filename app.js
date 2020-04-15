@@ -9,6 +9,8 @@ const express = require('express'),
 	flash = require('connect-flash'),
 	sgMail = require('@sendgrid/mail');
 
+require("dotenv").config();
+
 // ================================================================
 // Configuration
 // ================================================================
@@ -18,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(flash());
 
-mongoose.connect("mongodb+srv://admin:qqLuPTe9fZZGo5ai@cluster0-aiymc.mongodb.net/hookup?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`mongodb+srv://admin:${process.env.DB_PASSWORD}qqLuPTe9fZZGo5ai@cluster0-aiymc.mongodb.net/hookup?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(
 	session({
@@ -153,7 +155,7 @@ app.post("/forgetPassword", function(req, res){
 					newPassword = passGen();
 					user.setPassword(newPassword, function(){
 						user.save();
-						sgMail.setApiKey("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");
+						sgMail.setApiKey(process.env.SEND_GRID_API);
 						const msg = {
 						to: foundUser.Email,
 						from: 'Connect.GLBajaj@gmail.com',
