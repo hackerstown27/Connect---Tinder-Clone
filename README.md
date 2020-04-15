@@ -1,6 +1,5 @@
 # Connect-Tinder-Clone
 
-=============================
 Note
 =============================
 * For Registeration it uses another scirpt for Web Scraping
